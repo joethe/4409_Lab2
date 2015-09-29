@@ -77,3 +77,6 @@
 ;; Using pmap here leads to thrashing and poor performance.
 (defn total-score-on [script rubrics]
   (reduce + (map (partial score-on script) rubrics)))
+
+(defn thingy-for-the-agent [script rubrics scoreBox]
+  (swap! scoreBox (total-score-on script rubrics)))

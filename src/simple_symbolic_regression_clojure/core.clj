@@ -24,6 +24,7 @@
 
 (defn print-generation-report
   [population]
+  (shutdown-agents)
   (println (str "Min error: "
                 (apply min (map get-score population)))))
 

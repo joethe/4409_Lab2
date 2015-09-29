@@ -67,8 +67,10 @@
 (defn set-score [individual score]
   (assoc individual :score score))
 
+;; Added deref here because atoms
 (defn get-score [individual]
-  (:score individual))
+  (deref (:score individual))
+  )
 
 
 ;;; Generating random scripts, individuals, etc.
@@ -99,14 +101,15 @@
 (defn score-using-rubrics
   "assigns the score value of an Individual by invoking `total-score-on` a set of Rubrics"
   [individual rubrics]
-  (set-score individual (total-score-on (:script individual) rubrics))
-  )
+  (let [scoreBox (atom 0) superCoolAgent (agent scoreBox)]
+    (set-score individual (deref (send superCoolAgent thingy-for-the-agent (:script individual) rubrics)))
+  ))
 
 
 (defn score-population
   "takes an unscored population and returns the same ones with scores assigned"
   [population rubrics]
-  (pmap #(score-using-rubrics % rubrics) population))
+  (map #(score-using-rubrics % rubrics) population))
 
 
 ;;; Main evolutionary loop
