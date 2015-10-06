@@ -69,8 +69,11 @@
 
 ;; Added deref here because atoms
 (defn get-score [individual]
+  (when-not (deref (:score individual))
+    (await (:score individual)))
   (deref (:score individual))
-  )
+
+)
 
 
 ;;; Generating random scripts, individuals, etc.
@@ -101,8 +104,8 @@
 (defn score-using-rubrics
   "assigns the score value of an Individual by invoking `total-score-on` a set of Rubrics"
   [individual rubrics]
-  (let [scoreBox (atom 0) superCoolAgent (agent scoreBox)]
-    (set-score individual (deref (send superCoolAgent thingy-for-the-agent (:script individual) rubrics)))
+  (let [superCoolAgent (agent nil)]
+    (set-score individual (send superCoolAgent total-score-on (:script individual) rubrics))
   ))
 
 

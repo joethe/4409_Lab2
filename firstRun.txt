@@ -1,0 +1,25 @@
+
+real	1 37 922
+user	6 48 636
+sys	0 17 175
+ 
+
+real	1 58 693
+user	7 45 169
+sys	0 24 748
+ 
+
+real	1 40 920
+user	6 52 883
+sys	0 20 659
+ 
+
+real	1 46 098
+user	7 3 663
+sys	0 21 758
+ 
+
+real	1 10 840
+user	5 19 540
+sys	0 13 863
+ 
